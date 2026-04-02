@@ -39,11 +39,20 @@
                     <a href="https://sites.google.com/view/intranet-inmobilien/home" target="_blank" class="text-white/80 hover:text-white font-medium text-sm uppercase tracking-wider transition-colors">Intranet</a>
                 </div>
                 
-                <button class="md:hidden text-white" aria-label="Toggle menu">
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Toggle menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800 absolute w-full left-0 top-16 shadow-xl">
+                <div class="flex flex-col px-6 py-4 space-y-4">
+                    <a href="#home" class="mobile-link text-white/80 hover:text-white font-medium text-sm uppercase tracking-wider">Home</a>
+                    <a href="#servicios" class="mobile-link text-white/80 hover:text-white font-medium text-sm uppercase tracking-wider">Servicios</a>
+                    <a href="#contacto" class="mobile-link text-white/80 hover:text-white font-medium text-sm uppercase tracking-wider">Contacto</a>
+                    <a href="https://sites.google.com/view/intranet-inmobilien/home" target="_blank" class="text-white/80 hover:text-white font-medium text-sm uppercase tracking-wider">Intranet</a>
+                </div>
             </div>
         </nav>
 
@@ -236,5 +245,25 @@
             </div>
         </section>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const links = document.querySelectorAll('.mobile-link');
+
+            // Abrir y cerrar el menú cuando se toca la hamburguesa
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Ocultar el menú automáticamente al hacer clic en un enlace
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -64,17 +64,13 @@ header.scrolled, header.inner-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    /* Se quitó position: relative para que el menú móvil tome el 100% de la pantalla */
 }
 
 .brand-logo img {
     height: 70px; 
     width: auto;
     transition: var(--transition-smooth);
-}
-
-header.scrolled .brand-logo img, header.inner-header .brand-logo img {
-    filter: brightness(0) saturate(100%) invert(86%) sepia(21%) saturate(830%) hue-rotate(338deg) brightness(97%) contrast(93%);
 }
 
 .nav-list {
@@ -132,7 +128,10 @@ header.scrolled .brand-logo img, header.inner-header .brand-logo img {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(rgba(36, 41, 48, 0.6), rgba(36, 41, 48, 0.9)), url('../img/hero-bg.jpg') center/cover no-repeat;
+    background: linear-gradient(rgba(36, 41, 48, 0.6), rgba(36, 41, 48, 0.9)), url('../img/hero-bg.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
@@ -230,11 +229,10 @@ header.scrolled .brand-logo img, header.inner-header .brand-logo img {
     border-left-color: var(--color-gold);
 }
 
-/* Ajuste de Negrilla para el Número del Eje */
 .service-number {
     display: block;
     font-size: 1.5rem;
-    font-weight: 700; /* Actualizado a 700 (bold) para coincidir con el estilo jerárquico */
+    font-weight: 700; 
     color: var(--color-gold);
     margin-bottom: 1rem;
     font-family: serif;
@@ -482,8 +480,15 @@ textarea.form-control {
 }
 
 @media (max-width: 768px) {
+    /* CORRECCIÓN HERO: Desactiva el parallax en celular para que la foto se vea bien */
+    .hero {
+        background-attachment: scroll; 
+        background-position: center center;
+    }
+
     .menu-toggle { display: flex; }
     
+    /* CORRECCIÓN MENÚ: Ahora ocupa el 100% perfecto */
     .nav-menu {
         position: absolute;
         top: 100%;

@@ -1,80 +1,77 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     const header = document.getElementById('navbar');
     const logoImg = document.getElementById('logo-img');
-    
-    // Rutas de tus dos logos
+
+    // Rutas de los dos logos
     const logoBlanco = 'img/logo-horizontal.png';
     const logoDorado = 'img/logo-dorado.png';
 
-    window.addEventListener('scroll', () => {
-        // En la página de contacto no hacemos el efecto, siempre es oscuro
-        if (header.classList.contains('inner-header')) return;
+    // Precarga el logo dorado para que no parpadee al hacer scroll
+    new Image().src = logoDorado;
 
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-            // Cambia físicamente al logo dorado
-            if (logoImg) logoImg.src = logoDorado;
-        } else {
-            header.classList.remove('scrolled');
-            // Regresa al logo blanco original
-            if (logoImg) logoImg.src = logoBlanco;
-        }
-    });
+    // Header: cambia de transparente a oscuro al hacer scroll (solo en la portada)
+    if (header && !header.classList.contains('inner-header')) {
+        let isScrolled = null;
 
-    // Menú Móvil Desplegable
+        const updateHeader = () => {
+            const shouldBeScrolled = window.scrollY > 50;
+            if (shouldBeScrolled === isScrolled) return; // solo actúa cuando cambia el estado
+            isScrolled = shouldBeScrolled;
+
+            header.classList.toggle('scrolled', shouldBeScrolled);
+            if (logoImg) logoImg.src = shouldBeScrolled ? logoDorado : logoBlanco;
+        };
+
+        window.addEventListener('scroll', updateHeader, { passive: true });
+        updateHeader(); // aplica el estado correcto si la página carga ya desplazada
+    }
+
+    // Menú móvil desplegable
     const menuToggle = document.getElementById('menu-toggle');
     const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
 
-    menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    });
+    if (menuToggle && navMenu) {
+        const setMenu = (open) => {
+            navMenu.classList.toggle('active', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        };
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
+        menuToggle.addEventListener('click', () => {
+            setMenu(!navMenu.classList.contains('active'));
         });
-    });
 
-    // Animaciones Fade-In
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => setMenu(false));
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') setMenu(false);
+        });
+    }
+
+    // Animaciones fade-in
     const fadeElements = document.querySelectorAll('.fade-in');
 
-    const appearOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-                return;
-            } else {
+    if ('IntersectionObserver' in window) {
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
                 entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
-            }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
         });
-    }, appearOptions);
 
-    fadeElements.forEach(el => {
-        appearOnScroll.observe(el);
-    });
+        fadeElements.forEach(el => appearOnScroll.observe(el));
+    } else {
+        // Navegadores antiguos: mostrar todo sin animación
+        fadeElements.forEach(el => el.classList.add('visible'));
+    }
 
-    // Scroll Suave inteligente
-    document.querySelectorAll('a[href*="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            if (this.pathname === window.location.pathname || (this.pathname === '/' && window.location.pathname.endsWith('index.html'))) {
-                const targetId = this.hash;
-                if(targetId) {
-                    const targetElement = document.querySelector(targetId);
-                    if(targetElement) {
-                        e.preventDefault();
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            }
-        });
-    });
+    // El scroll suave a #servicios lo hace el CSS (scroll-behavior: smooth),
+    // por eso ya no hace falta código extra aquí.
 });

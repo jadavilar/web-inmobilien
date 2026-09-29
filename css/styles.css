@@ -17,6 +17,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* evita que el header fijo tape el título al saltar a #servicios */
 }
 
 body {
@@ -32,6 +33,13 @@ a {
     text-decoration: none;
     color: inherit;
     transition: var(--transition-smooth);
+}
+
+a:focus-visible,
+button:focus-visible,
+.form-control:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
 }
 
 .container {
@@ -110,6 +118,9 @@ header.scrolled, header.inner-header {
     flex-direction: column;
     gap: 6px;
     z-index: 1000;
+    background: none;
+    border: 0;
+    padding: 10px 0;
 }
 
 .menu-toggle .line {
@@ -123,7 +134,8 @@ header.scrolled, header.inner-header {
 .hero {
     position: relative;
     height: 100vh;
-    min-height: 700px;
+    height: 100svh; /* altura real en móviles (sin la barra del navegador) */
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -428,7 +440,8 @@ textarea.form-control {
     flex-wrap: wrap;
 }
 
-.footer-col h4 {
+.footer-col h4,
+.footer-heading {
     color: var(--color-gold);
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -458,16 +471,35 @@ textarea.form-control {
     font-weight: 300;
 }
 
-/* Fade In */
-.fade-in {
+/* Anti-spam del formulario (invisible para personas) */
+.honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+/* Fade In: solo oculta el contenido si JavaScript está activo */
+.js .fade-in {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.fade-in.visible {
+.js .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .fade-in { opacity: 1; transform: none; transition: none; }
+}
+
+/* El fondo "fixed" no funciona bien en tablets/celulares táctiles (iPad incluido) */
+@media (hover: none) {
+    .hero { background-attachment: scroll; }
 }
 
 /* Responsive */
@@ -480,9 +512,8 @@ textarea.form-control {
 }
 
 @media (max-width: 768px) {
-    /* CORRECCIÓN HERO: Desactiva el parallax en celular para que la foto se vea bien */
     .hero {
-        background-attachment: scroll; 
+        background-attachment: scroll;
         background-position: center center;
     }
 

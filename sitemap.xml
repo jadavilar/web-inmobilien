@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
   <url>
-    <loc>https://jadavilar.github.io/web-inmobilien/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://inmobilien.com.ec/</loc>
+    <lastmod>2026-09-29</lastmod>
   </url>
-
   <url>
-    <loc>https://jadavilar.github.io/web-inmobilien/contacto.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://inmobilien.com.ec/contacto.html</loc>
+    <lastmod>2026-09-29</lastmod>
   </url>
-
 </urlset>

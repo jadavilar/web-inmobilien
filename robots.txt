@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jadavilar.github.io/web-inmobilien/sitemap.xml
+Sitemap: https://inmobilien.com.ec/sitemap.xml

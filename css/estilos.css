@@ -345,7 +345,7 @@ form .btn:disabled{opacity:.7;cursor:wait}
 .firma-rule{margin-top:34px;border-top:1px solid var(--line);max-width:580px}
 
 /* Textos justificados (excepto citas y títulos) */
-.hero-text > p,.firma p,.sec-head p,.areas .area p,.freq p,.method-intro p,.phase p,.contact-intro > p,.legal-hero p,.legal-body p,.legal-body li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+.hero-text > p,.firma p,.sec-head p,.areas .area p,.freq p,.method-intro p,.phase p,.contact-intro > p,.legal-hero p,.legal-body p,.legal-body li{text-align:justify;-webkit-hyphens:manual;hyphens:manual}
 .legal-hero p.updated{text-align:left}
 
 /* Servicios: número y título en la misma línea */
@@ -353,3 +353,6 @@ form .btn:disabled{opacity:.7;cursor:wait}
 .areas .area .n{margin:0;font-size:1.25rem}
 .areas .area h3{margin:0;font-size:1.6rem}
 .areas .area p{grid-column:1/-1;margin:0}
+
+/* Sin división de palabras con guion en todo el sitio */
+body{-webkit-hyphens:manual;hyphens:manual;overflow-wrap:normal;word-break:normal}

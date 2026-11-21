@@ -63,3 +63,35 @@ desktop.addEventListener('change', onScroll);
 onScroll();
 // Precarga del logo claro para que el cambio sea instantáneo
 ['img/logo-icono-claro.svg', 'img/logo-texto-claro.svg'].forEach(function (s) { new Image().src = s; });
+
+// Formulario de contacto: envío sin salir de la página
+var form = document.getElementById('contact-form');
+if (form && window.fetch) {
+  var formStatus = document.getElementById('form-status');
+  var btn = form.querySelector('button[type="submit"]');
+  var btnHTML = btn.innerHTML;
+  function show(type, title, text) {
+    formStatus.className = 'form-status ' + type;
+    formStatus.innerHTML = '<b>' + title + '</b><span>' + text + '</span>';
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+    formStatus.className = 'form-status';
+    formStatus.innerHTML = '';
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      .then(function (res) {
+        if (!res.ok) throw new Error('error');
+        form.reset();
+        show('ok', 'Gracias, hemos recibido su solicitud.', 'Nos pondremos en contacto con usted a la brevedad.');
+      })
+      .catch(function () {
+        show('error', 'No pudimos enviar su solicitud.', 'Inténtelo nuevamente o escríbanos por WhatsApp al +593 99 944 9324.');
+      })
+      .finally(function () {
+        btn.disabled = false;
+        btn.innerHTML = btnHTML;
+      });
+  });
+}

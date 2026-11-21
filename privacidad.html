@@ -7,6 +7,8 @@
 <meta name="description" content="Conozca cómo Inmobilien trata y protege sus datos personales conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador.">
 <meta name="robots" content="index, follow">
 <link rel="icon" href="img/logo-icono.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="canonical" href="https://inmobilien.com.ec/privacidad.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,9 +29,29 @@
         <li><a href="https://sites.google.com/view/intranet-inmobilien/home" class="intranet" target="_blank" rel="noopener">Intranet</a></li>
       </ul>
     </nav>
-    <button class="burger" aria-label="Abrir menú"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h18M3 16h18"/></svg></button>
+    <button class="burger" aria-label="Abrir menú" aria-controls="drawer" aria-expanded="false"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h18M3 16h18"/></svg></button>
   </div>
 </header>
+
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menú">
+  <div class="drawer-head">
+    <img src="img/logo-icono-claro.svg" alt="Inmobilien" class="drawer-logo">
+    <button class="drawer-close" id="drawer-close" aria-label="Cerrar menú"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  </div>
+  <nav class="drawer-nav" aria-label="Menú móvil">
+    <a href="./#firma">La firma</a>
+    <a href="./#servicios">Servicios</a>
+    <a href="./#mantenimiento">Mantenimiento</a>
+    <a href="./#contacto">Contacto</a>
+    <a href="https://sites.google.com/view/intranet-inmobilien/home" target="_blank" rel="noopener">Intranet</a>
+  </nav>
+  <a href="./#contacto" class="btn drawer-cta">Solicitar una propuesta</a>
+  <div class="drawer-foot">
+    <a href="tel:+593999449324">+593 99 944 9324</a>
+    <a href="mailto:jdavila@inmobilien.com.ec">jdavila@inmobilien.com.ec</a>
+  </div>
+</aside>
 
 <main>
   <section class="legal-hero" style="padding-left:0;padding-right:0">

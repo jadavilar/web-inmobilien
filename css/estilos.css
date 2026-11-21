@@ -340,3 +340,16 @@ form .btn:disabled{opacity:.7;cursor:wait}
 .form-status b{font-family:var(--serif);font-size:1.2rem;font-weight:500}
 .form-status span{color:inherit;opacity:.8}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Línea bajo el texto de La firma */
+.firma-rule{margin-top:34px;border-top:1px solid var(--line);max-width:580px}
+
+/* Textos justificados (excepto citas y títulos) */
+.hero-text > p,.firma p,.sec-head p,.areas .area p,.freq p,.method-intro p,.phase p,.contact-intro > p,.legal-hero p,.legal-body p,.legal-body li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+.legal-hero p.updated{text-align:left}
+
+/* Servicios: número y título en la misma línea */
+.areas .area{display:grid;grid-template-columns:auto 1fr;column-gap:14px;row-gap:12px;align-items:baseline;align-content:start;padding-top:36px;padding-bottom:40px}
+.areas .area .n{margin:0;font-size:1.25rem}
+.areas .area h3{margin:0;font-size:1.6rem}
+.areas .area p{grid-column:1/-1;margin:0}
